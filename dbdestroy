@@ -1,0 +1,17 @@
+#!/bin/bash
+
+EXPECTED_ARGS=1
+E_BADARGS=65
+MYSQL=`which mysql`
+
+Q1="DROP DATABASE $1;"
+Q1="DROP USER '$1'@'localhost';"
+
+if [ $# -ne $EXPECTED_ARGS ]
+then
+  echo "Usage: $0 dbname"
+  exit $E_BADARGS
+fi
+
+$MYSQL -uroot -p -e "$Q1"
+$MYSQL -uroot -p -e "$Q2"

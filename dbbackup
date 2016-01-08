@@ -1,0 +1,13 @@
+#!/bin/bash
+
+EXPECTED_ARGS=1
+E_BADARGS=65
+MYSQLDUMP=`which mysqldump`
+
+if [ $# -ne $EXPECTED_ARGS ]
+then
+  echo "Usage: $0 dbname"
+  exit $E_BADARGS
+fi
+
+$MYSQLDUMP -u root -p $1 > $1-$(date '+%Y-%m-%d-%H-%M-%S').sql

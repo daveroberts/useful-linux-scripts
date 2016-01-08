@@ -1,0 +1,47 @@
+#!/bin/bash
+
+EXPECTED_ARGS=1
+E_BADARGS=65
+
+if [ $# -ne $EXPECTED_ARGS ]
+then
+  echo "Usage: $0 directory"
+  exit $E_BADARGS
+fi
+
+directory="$1"
+
+if [ ! -d "$directory" ]
+then
+	echo "$directory is not a directory" >&2
+	exit 2
+fi
+
+#echo -n "Encryption password: "
+#stty -echo
+#read
+#password="$REPLY"
+#stty echo
+#REPLY=""
+
+#echo -en "\nConfirm: "
+#stty -echo
+#read
+#confirm="$REPLY"
+#stty echo
+#REPLY=""
+
+#if [ "x$confirm" != "x$password" ]
+#then
+#	echo -e "\nPassword and confirmation does not match" >&2
+#	exit 4
+#fi
+
+#confirm=""
+
+backup_name=$(pwd)"/"$(basename "$directory")"-"$(date '+%Y-%m-%d-%H-%M-%S')
+
+echo -e "\nBackup will be created to $backup_name.tgz"
+
+tar -czvf $backup_name.tgz $directory && echo "OK"
+

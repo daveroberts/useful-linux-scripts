@@ -1,0 +1,13 @@
+#!/bin/bash
+
+EXPECTED_ARGS=2
+E_BADARGS=65
+MYSQL=`which mysql`
+
+if [ $# -ne $EXPECTED_ARGS ]
+then
+  echo "Usage: $0 dbname dbfile.sql"
+  exit $E_BADARGS
+fi
+
+$MYSQL -u root -p $1 < $2
